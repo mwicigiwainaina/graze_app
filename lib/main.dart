@@ -1,36 +1,47 @@
 import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+// Import Firebase Auth
 
-void main() async {
+
+import 'features/user_login_registration/presentation/screens/home_screen.dart';
+import 'features/user_login_registration/presentation/screens/login_screen.dart';
+import 'features/user_login_registration/presentation/screens/signup_screen.dart';
+import 'features/user_login_registration/presentation/screens/splash_screen.dart';
+
+Future main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp(
-    options: const FirebaseOptions(
-      apiKey: "AIzaSyCLEpzXxrA4THXlI5C8kGWzFePPalG-7Mg",
-      authDomain: "graze-the-app.firebaseapp.com",
-      projectId: "graze-the-app",
-      storageBucket: "graze-the-app.appspot.com",
-      messagingSenderId: "731884690951",
-      appId: "1:731884690951:web:372d48867ebd6cdbdf14a2",
-      measurementId: "G-GHBXB4CBPD" 
-    ),
-  );
-
-  runApp(const MyApp());
-
+  if (kIsWeb) {
+    await Firebase.initializeApp(
+      options: const FirebaseOptions(
+        apiKey: " ",
+        appId: " ",
+        messagingSenderId: " ",
+        projectId: " ",
+      ),
+    );
+  } else {
+    await Firebase.initializeApp();
+  }
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
-
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
+      title: 'Flutter Firebase',
+      routes: {
+        '/': (context) => const SplashScreen(
+          // Here, you can decide whether to show the LoginPage or HomePage based on user authentication
+          child: LoginPage(),
+        ),
+        '/login': (context) => const LoginPage(),
+        '/signUp': (context) => const SignUpPage(),
+        '/home': (context) => const HomePage(),
+      },
     );
   }
 }

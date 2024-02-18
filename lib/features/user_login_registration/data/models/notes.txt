@@ -1,3 +1,0 @@
-Fields should be the same as entity. 
-We must separate to maintain clean code,
-if we want to chnage our data type later, we would have to change other stuff if we didnt

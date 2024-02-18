@@ -1,2 +1,0 @@
-Use RetroFit
-- download, and add to dependencies

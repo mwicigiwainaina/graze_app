@@ -1,2 +1,0 @@
-A blueprint for storing information about a user when they register.
-What kind of data will it operate with
