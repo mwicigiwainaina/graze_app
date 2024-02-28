@@ -1,47 +1,50 @@
 import 'package:firebase_core/firebase_core.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-// Import Firebase Auth
-
-
-import 'features/user_login_registration/presentation/screens/home_screen.dart';
-import 'features/user_login_registration/presentation/screens/login_screen.dart';
-import 'features/user_login_registration/presentation/screens/signup_screen.dart';
-import 'features/user_login_registration/presentation/screens/splash_screen.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 Future main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  if (kIsWeb) {
-    await Firebase.initializeApp(
-      options: const FirebaseOptions(
-        apiKey: " ",
-        appId: " ",
-        messagingSenderId: " ",
-        projectId: " ",
-      ),
-    );
-  } else {
-    await Firebase.initializeApp();
-  }
+  await Firebase.initializeApp();
+  await di.init();
   runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
+  const MyApp({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(create: (_) => di.sl<AuthCubit>()..appStarted(context)),
+        BlocProvider(create: (_) => di.sl<CredentialCubit>()),
+        BlocProvider(create: (_) => di.sl<UserCubit>()),
+        BlocProvider(create: (_) => di.sl<GetSingleUserCubit>()),
+        BlocProvider(create: (_) => di.sl<GetSingleOtherUserCubit>()),
+      ],
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        title: "Instagram Clone",
+        darkTheme: ThemeData.dark(),
+        onGenerateRoute: OnGenerateRoute.route,
+        initialRoute: "/",
+        routes: {
+          "/": (context) {
+            return BlocBuilder<AuthCubit, AuthState>(
+              builder: (context, authState) {
+                if (authState is Authenticated) {
+                  return MainScreen(uid: authState.uid,);
 
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'Flutter Firebase',
-      routes: {
-        '/': (context) => const SplashScreen(
-          // Here, you can decide whether to show the LoginPage or HomePage based on user authentication
-          child: LoginPage(),
-        ),
-        '/login': (context) => const LoginPage(),
-        '/signUp': (context) => const SignUpPage(),
-        '/home': (context) => const HomePage(),
-      },
+                } else {
+                  return SignInPage();
+                }
+              },
+            );
+          }
+        },
+      ),
     );
   }
 }
+
+
