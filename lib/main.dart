@@ -1,6 +1,15 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:graze_app/features/presentation/cubit/credential/credential_cubit.dart';
+import 'package:graze_app/features/presentation/cubit/user/get_single_other_user.dart/get_single_other_user_cubit.dart';
+import 'package:graze_app/features/presentation/cubit/user/get_single_user/get_single_user_cubit.dart';
+import 'package:graze_app/features/presentation/cubit/user/user_cubit.dart';
+import 'package:graze_app/features/presentation/screens/auth/sign_in_page.dart';
+import 'package:graze_app/features/presentation/screens/main_screen/main_screen.dart';
+import 'package:graze_app/on_generate_route.dart';
+import 'package:graze_app/features/presentation/cubit/auth/auth_cubit.dart';
+import 'injection_container.dart' as di;
 
 Future main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -24,7 +33,7 @@ class MyApp extends StatelessWidget {
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
-        title: "Instagram Clone",
+        title: "Graze App",
         darkTheme: ThemeData.dark(),
         onGenerateRoute: OnGenerateRoute.route,
         initialRoute: "/",
@@ -33,7 +42,7 @@ class MyApp extends StatelessWidget {
             return BlocBuilder<AuthCubit, AuthState>(
               builder: (context, authState) {
                 if (authState is Authenticated) {
-                  return MainScreen(uid: authState.uid,);
+                  return SignInPage();
 
                 } else {
                   return SignInPage();
