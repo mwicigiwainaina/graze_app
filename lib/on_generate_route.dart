@@ -55,12 +55,12 @@ class OnGenerateRoute {
       //   }
       //   return routeBuilder(NoPageFound());
       // }
-      case PageConst.singleUserProfilePage: {
-        if (args is String) {
-          return routeBuilder(SingleUserProfilePage(otherUserId: args,));
-        }
-        return routeBuilder(NoPageFound());
-      }
+      // case PageConst.singleUserProfilePage: {
+      //   if (args is String) {
+      //     return routeBuilder(SingleUserProfilePage(otherUserId: args,));
+      //   }
+      //   return routeBuilder(NoPageFound());
+      // }
       // case PageConst.followingPage: {
       //   if (args is UserEntity) {
       //     return routeBuilder(FollowingPage(user: args,));
@@ -74,16 +74,10 @@ class OnGenerateRoute {
       //   return routeBuilder(NoPageFound());
       // }
       case PageConst.signInPage: {
-        return routeBuilder(SignInPage());
-      }
-      case PageConst.signUpPage: {
-        return routeBuilder(SignUpPage());
-      }
-      case PageConst.signUpPage: {
-        return routeBuilder(SignUpPage());
+        return routeBuilder(const SignInPage());
       }
       default: {
-        NoPageFound();
+        const NoPageFound();
       }
     }
   }
@@ -100,9 +94,9 @@ class NoPageFound extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Page not found"),
+        title: const Text("Page not found"),
       ),
-      body: Center(child: Text("Page not found"),),
+      body: const Center(child: Text("Page not found"),),
     );
   }
 }

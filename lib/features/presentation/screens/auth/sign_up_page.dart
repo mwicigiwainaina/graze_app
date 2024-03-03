@@ -78,11 +78,11 @@ class _SignUpPageState extends State<SignUpPage> {
             child: Container(),
             flex: 2,
           ),
-          Center(
-              child: SvgPicture.asset(
-            "assets/graze_logo.svg",
-            color: primaryColor,
-          )),
+          // Center(
+          //     child: SvgPicture.asset(
+          //   "assets/ic_grazeLogo.svg",
+          //   color: primaryColor,
+          // )),
           sizeVer(15),
           Center(
             child: Stack(
@@ -173,26 +173,33 @@ class _SignUpPageState extends State<SignUpPage> {
     );
   }
 
-  Future<void> _signUpUser() async {
-    setState(() {
-      _isSigningUp = true;
-    });
-    BlocProvider.of<CredentialCubit>(context)
-        .signUpUser(
-            user: UserEntity(
-                email: _emailController.text,
-                password: _passwordController.text,
-                bio: _bioController.text,
-                username: _usernameController.text,
-                totalPosts: 0,
-                totalFollowing: 0,
-                followers: [],
-                totalFollowers: 0,
-                website: "",
-                following: [],
-                name: ""))
-        .then((value) => _clear());
+Future<void> _signUpUser() async {
+  setState(() {
+    _isSigningUp = true;
+  });
+  try {
+    await BlocProvider.of<CredentialCubit>(context).signUpUser(
+      user: UserEntity(
+        email: _emailController.text,
+        password: _passwordController.text,
+        bio: _bioController.text,
+        username: _usernameController.text,
+        totalPosts: 0,
+        totalFollowing: 0,
+        followers: [],
+        totalFollowers: 0,
+        website: "",
+        following: [],
+        name: "",
+      ),
+    );
+  } catch (e) {
+    // Print or log the error
+    print("Error during user sign-up: $e");
+  } finally {
+    _clear();
   }
+}
 
   _clear() {
     setState(() {

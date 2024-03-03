@@ -1,7 +1,6 @@
 import 'dart:io';
 import 'package:bloc/bloc.dart';
 import 'package:graze_app/features/domain/entities/user/user_entity.dart';
-
 import 'package:equatable/equatable.dart';
 import 'package:graze_app/features/domain/usecases/user/sign_in_user_usecase.dart';
 import 'package:graze_app/features/domain/usecases/user/sign_up_user_usecase.dart';

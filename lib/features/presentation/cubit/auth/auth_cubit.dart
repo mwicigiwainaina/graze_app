@@ -4,7 +4,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:graze_app/features/domain/usecases/user/get_current_uid_usecase.dart';
 import 'package:graze_app/features/domain/usecases/user/is_sign_in_usecase.dart';
 import 'package:graze_app/features/domain/usecases/user/sign_out_usecase.dart';
-
 part 'auth_state.dart';
 
 class AuthCubit extends Cubit<AuthState> {

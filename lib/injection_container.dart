@@ -7,6 +7,12 @@ import 'package:graze_app/features/data/data_sources/remote_data_sources_impl.da
 import 'package:graze_app/features/data/models/user/user_model.dart';
 import 'package:graze_app/features/data/repository/firebase_repository_impl.dart';
 import 'package:graze_app/features/domain/repository/firebase_repository.dart';
+import 'package:graze_app/features/domain/usecases/post/create_post_usecase.dart';
+import 'package:graze_app/features/domain/usecases/post/delete_post_usecase.dart';
+import 'package:graze_app/features/domain/usecases/post/like_post_usecase.dart';
+import 'package:graze_app/features/domain/usecases/post/read_post_usecase.dart';
+import 'package:graze_app/features/domain/usecases/post/read_single_post_usecase.dart';
+import 'package:graze_app/features/domain/usecases/post/update_post_usecase.dart';
 import 'package:graze_app/features/domain/usecases/user/create_user_usecase.dart';
 import 'package:graze_app/features/domain/usecases/user/follow_unfollow_usecase.dart';
 import 'package:graze_app/features/domain/usecases/user/get_current_uid_usecase.dart';
@@ -20,6 +26,8 @@ import 'package:graze_app/features/domain/usecases/user/sign_up_user_usecase.dar
 import 'package:graze_app/features/domain/usecases/user/update_user_usecase.dart';
 import 'package:graze_app/features/presentation/cubit/auth/auth_cubit.dart';
 import 'package:graze_app/features/presentation/cubit/credential/credential_cubit.dart';
+import 'package:graze_app/features/presentation/cubit/post/get_single_post/get_single_post_cubit.dart';
+import 'package:graze_app/features/presentation/cubit/post/post_cubit.dart';
 import 'package:graze_app/features/presentation/cubit/user/get_single_other_user.dart/get_single_other_user_cubit.dart';
 import 'package:graze_app/features/presentation/cubit/user/get_single_user/get_single_user_cubit.dart';
 import 'package:graze_app/features/presentation/cubit/user/user_cubit.dart';
@@ -58,19 +66,19 @@ Future<void> init() async {
     () => GetSingleOtherUserCubit(getSingleOtherUserUseCase: sl.call()),
   );
 
-  // // Post Cubit Injection
-  // sl.registerFactory(
-  //   () => PostCubit(
-  //       createPostUseCase: sl.call(),
-  //       deletePostUseCase: sl.call(),
-  //       likePostUseCase: sl.call(),
-  //       readPostUseCase: sl.call(),
-  //       updatePostUseCase: sl.call()),
-  // );
+  // Post Cubit Injection
+  sl.registerFactory(
+    () => PostCubit(
+        createPostUseCase: sl.call(),
+        deletePostUseCase: sl.call(),
+        likePostUseCase: sl.call(),
+        readPostUseCase: sl.call(),
+        updatePostUseCase: sl.call()),
+  );
 
-  // sl.registerFactory(
-  //   () => GetSinglePostCubit(readSinglePostUseCase: sl.call()),
-  // );
+  sl.registerFactory(
+    () => GetSinglePostCubit(readSinglePostUseCase: sl.call()),
+  );
 
   // // Comment Cubit Injection
   // sl.registerFactory(
@@ -113,12 +121,12 @@ Future<void> init() async {
   //     () => UploadImageToStorageUseCase(repository: sl.call()));
 
   // // Post
-  // sl.registerLazySingleton(() => CreatePostUseCase(repository: sl.call()));
-  // sl.registerLazySingleton(() => ReadPostsUseCase(repository: sl.call()));
-  // sl.registerLazySingleton(() => LikePostUseCase(repository: sl.call()));
-  // sl.registerLazySingleton(() => UpdatePostUseCase(repository: sl.call()));
-  // sl.registerLazySingleton(() => DeletePostUseCase(repository: sl.call()));
-  // sl.registerLazySingleton(() => ReadSinglePostUseCase(repository: sl.call()));
+  sl.registerLazySingleton(() => CreatePostUseCase(repository: sl.call()));
+  sl.registerLazySingleton(() => ReadPostsUseCase(repository: sl.call()));
+  sl.registerLazySingleton(() => LikePostUseCase(repository: sl.call()));
+  sl.registerLazySingleton(() => UpdatePostUseCase(repository: sl.call()));
+  sl.registerLazySingleton(() => DeletePostUseCase(repository: sl.call()));
+  sl.registerLazySingleton(() => ReadSinglePostUseCase(repository: sl.call()));
 
   // // Comment
   // sl.registerLazySingleton(() => CreateCommentUseCase(repository: sl.call()));
