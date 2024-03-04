@@ -5,6 +5,10 @@ import 'package:graze_app/features/domain/entities/posts/post_entity.dart';
 import 'package:graze_app/features/domain/entities/user/user_entity.dart';
 import 'package:graze_app/features/presentation/screens/auth/sign_in_page.dart';
 import 'package:graze_app/features/presentation/screens/auth/sign_up_page.dart';
+import 'package:graze_app/features/presentation/screens/profile/edit_profile_page.dart';
+import 'package:graze_app/features/presentation/screens/profile/followers_page.dart';
+import 'package:graze_app/features/presentation/screens/profile/following_page.dart';
+import 'package:graze_app/features/presentation/screens/profile/single_user_profile_page.dart';
 
 
 class OnGenerateRoute {
@@ -12,15 +16,15 @@ class OnGenerateRoute {
     final args = settings.arguments;
 
     switch(settings.name) {
-      // case PageConst.editProfilePage: {
-      //   if (args is UserEntity) {
-      //     return routeBuilder(EditProfilePage(currentUser: args,));
+      case PageConst.editProfilePage: {
+        if (args is UserEntity) {
+          return routeBuilder(EditProfilePage(currentUser: args,));
 
-      //   } else {
-      //     return routeBuilder(NoPageFound());
-      //   }
+        } else {
+          return routeBuilder(NoPageFound());
+        }
 
-      // }
+      }
       // case PageConst.updatePostPage: {
       //   if (args is PostEntity) {
       //     return routeBuilder(UpdatePostPage(post: args,));
@@ -57,24 +61,24 @@ class OnGenerateRoute {
       //   }
       //   return routeBuilder(NoPageFound());
       // }
-      // case PageConst.singleUserProfilePage: {
-      //   if (args is String) {
-      //     return routeBuilder(SingleUserProfilePage(otherUserId: args,));
-      //   }
-      //   return routeBuilder(NoPageFound());
-      // }
-      // case PageConst.followingPage: {
-      //   if (args is UserEntity) {
-      //     return routeBuilder(FollowingPage(user: args,));
-      //   }
-      //   return routeBuilder(NoPageFound());
-      // }
-      // case PageConst.followersPage: {
-      //   if (args is UserEntity) {
-      //     return routeBuilder(FollowersPage(user: args,));
-      //   }
-      //   return routeBuilder(NoPageFound());
-      // }
+      case PageConst.singleUserProfilePage: {
+        if (args is String) {
+          return routeBuilder(SingleUserProfilePage(otherUserId: args,));
+        }
+        return routeBuilder(NoPageFound());
+      }
+      case PageConst.followingPage: {
+        if (args is UserEntity) {
+          return routeBuilder(FollowingPage(user: args,));
+        }
+        return routeBuilder(NoPageFound());
+      }
+      case PageConst.followersPage: {
+        if (args is UserEntity) {
+          return routeBuilder(FollowersPage(user: args,));
+        }
+        return routeBuilder(NoPageFound());
+      }
       case PageConst.signInPage: {
         return routeBuilder(SignInPage());
       }

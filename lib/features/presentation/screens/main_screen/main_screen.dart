@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:graze_app/core/constants/constants.dart';
 import 'package:graze_app/features/presentation/cubit/user/get_single_user/get_single_user_cubit.dart';
 import 'package:graze_app/features/presentation/screens/home/home_page.dart';
+import 'package:graze_app/features/presentation/screens/profile/profile_page.dart';
 import 'package:graze_app/features/presentation/screens/search/search_page.dart';
 
 class MainScreen extends StatefulWidget {
@@ -67,12 +68,12 @@ class _MainScreenState extends State<MainScreen> {
             body: PageView(
               controller: pageController,
               onPageChanged: onPageChanged,
-              children: const [
+              children: [
                 HomePage(),
                 SearchPage(),
                 // UploadPostPage(currentUser: currentUser),
                 // ActivityPage(),
-                // ProfilePage(currentUser: currentUser,)
+                ProfilePage(currentUser: currentUser,)
               ],
             ),
           );

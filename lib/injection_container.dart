@@ -13,6 +13,7 @@ import 'package:graze_app/features/domain/usecases/post/like_post_usecase.dart';
 import 'package:graze_app/features/domain/usecases/post/read_post_usecase.dart';
 import 'package:graze_app/features/domain/usecases/post/read_single_post_usecase.dart';
 import 'package:graze_app/features/domain/usecases/post/update_post_usecase.dart';
+import 'package:graze_app/features/domain/usecases/storage/upload_image_to_storage_usecase.dart';
 import 'package:graze_app/features/domain/usecases/user/create_user_usecase.dart';
 import 'package:graze_app/features/domain/usecases/user/follow_unfollow_usecase.dart';
 import 'package:graze_app/features/domain/usecases/user/get_current_uid_usecase.dart';
@@ -116,9 +117,9 @@ Future<void> init() async {
   sl.registerLazySingleton(
       () => GetSingleOtherUserUseCase(repository: sl.call()));
 
-  // // Cloud Storage
-  // sl.registerLazySingleton(
-  //     () => UploadImageToStorageUseCase(repository: sl.call()));
+  // Cloud Storage
+  sl.registerLazySingleton(
+      () => UploadImageToStorageUseCase(repository: sl.call()));
 
   // // Post
   sl.registerLazySingleton(() => CreatePostUseCase(repository: sl.call()));
