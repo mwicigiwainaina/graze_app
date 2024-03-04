@@ -71,7 +71,7 @@ class _SignInPageState extends State<SignInPage> {
           ),
           Center(
               child: Image.asset(
-                "assets/profile_default.png",
+                "assets/graze_logo.png",
                 color: primaryColor,
               )),
           sizeVer(30),

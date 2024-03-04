@@ -16,10 +16,10 @@ class HomePage extends StatelessWidget {
       backgroundColor: backgroundColor,
       appBar: AppBar(
         backgroundColor: backgroundColor,
-        title: SvgPicture.asset("assets/ic_instagram.svg", color: primaryColor, height: 32,),
-        actions: [
+        title: Image.asset("assets/graze_logo.png", color: primaryColor, height: 32,),
+        actions: const [
           Padding(
-            padding: const EdgeInsets.only(right: 10.0),
+            padding: EdgeInsets.only(right: 10.0),
             child: Icon(Icons.border_outer_outlined, color: primaryColor,),
           )
         ],
@@ -31,7 +31,7 @@ class HomePage extends StatelessWidget {
         child: BlocBuilder<PostCubit, PostState>(
           builder: (context, postState) {
             if (postState is PostLoading) {
-              return Center(child: CircularProgressIndicator(),);
+              return const Center(child: CircularProgressIndicator(),);
             }
             if (postState is PostFailure) {
               toast("Some Failure occured while creating the post");
@@ -48,7 +48,7 @@ class HomePage extends StatelessWidget {
                 },
               );
             }
-            return Center(child: CircularProgressIndicator(),);
+            return const Center(child: CircularProgressIndicator(),);
           },
         ),
       ),
@@ -56,6 +56,6 @@ class HomePage extends StatelessWidget {
   }
 
   _noPostsYetWidget() {
-    return Center(child: Text("No Posts Yet", style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 18),),);
+    return const Center(child: Text("No Posts Yet", style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 18),),);
   }
 }

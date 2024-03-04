@@ -78,11 +78,11 @@ class _SignUpPageState extends State<SignUpPage> {
             child: Container(),
             flex: 2,
           ),
-          // Center(
-          //     child: SvgPicture.asset(
-          //   "assets/ic_grazeLogo.svg",
-          //   color: primaryColor,
-          // )),
+          Center(
+              child: Image.asset(
+            "assets/graze_logo.png",
+            color: primaryColor,
+          )),
           sizeVer(15),
           Center(
             child: Stack(

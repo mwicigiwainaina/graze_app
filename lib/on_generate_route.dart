@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:graze_app/core/constants/constants.dart';
+import 'package:graze_app/features/domain/entities/app_entity.dart';
+import 'package:graze_app/features/domain/entities/posts/post_entity.dart';
 import 'package:graze_app/features/domain/entities/user/user_entity.dart';
 import 'package:graze_app/features/presentation/screens/auth/sign_in_page.dart';
 import 'package:graze_app/features/presentation/screens/auth/sign_up_page.dart';
@@ -74,10 +76,16 @@ class OnGenerateRoute {
       //   return routeBuilder(NoPageFound());
       // }
       case PageConst.signInPage: {
-        return routeBuilder(const SignInPage());
+        return routeBuilder(SignInPage());
+      }
+      case PageConst.signUpPage: {
+        return routeBuilder(SignUpPage());
+      }
+      case PageConst.signUpPage: {
+        return routeBuilder(SignUpPage());
       }
       default: {
-        const NoPageFound();
+        NoPageFound();
       }
     }
   }
@@ -94,9 +102,9 @@ class NoPageFound extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Page not found"),
+        title: Text("Page not found"),
       ),
-      body: const Center(child: Text("Page not found"),),
+      body: Center(child: Text("Page not found"),),
     );
   }
 }

@@ -8,7 +8,6 @@ import 'package:graze_app/features/domain/usecases/user/get_current_uid_usecase.
 import 'package:graze_app/features/presentation/cubit/post/post_cubit.dart';
 import 'package:graze_app/features/presentation/screens/posts/widgets/like_animation_widget.dart';
 import 'package:graze_app/profile_widget.dart';
-
 import 'package:intl/intl.dart';
 import 'package:graze_app/injection_container.dart'as di;
 
@@ -60,13 +59,13 @@ class _SinglePostCardWidgetState extends State<SinglePostCardWidget> {
                         ),
                       ),
                       sizeHor(10),
-                      Text("${widget.post.username}", style: TextStyle(color: primaryColor, fontWeight: FontWeight.bold),)
+                      Text("${widget.post.username}", style: const TextStyle(color: primaryColor, fontWeight: FontWeight.bold),)
                     ],
                   ),
                 ),
                 widget.post.creatorUid == _currentUid ?GestureDetector(onTap: () {
                   _openBottomModalSheet(context, widget.post);
-                },child: Icon(Icons.more_vert, color: primaryColor,)) : Container(width: 0, height: 0,)
+                },child: const Icon(Icons.more_vert, color: primaryColor,)) : Container(width: 0, height: 0,)
               ],
             ),
             sizeVer(10),
@@ -86,17 +85,17 @@ class _SinglePostCardWidgetState extends State<SinglePostCardWidget> {
                     child: profileWidget(imageUrl: "${widget.post.postImageUrl}"),
                   ),
                   AnimatedOpacity(
-                    duration: Duration(milliseconds: 200),
+                    duration: const Duration(milliseconds: 200),
                     opacity: _isLikeAnimating? 1 : 0,
                     child: LikeAnimationWidget(
-                     duration: Duration(milliseconds: 200),
+                     duration: const Duration(milliseconds: 200),
                     isLikeAnimating: _isLikeAnimating,
                     onLikeFinish: () {
                        setState(() {
                          _isLikeAnimating = false;
                        });
                     },
-                    child: Icon(Icons.favorite, size: 100, color: Colors.white,)),
+                    child: const Icon(Icons.favorite, size: 100, color: Colors.white,)),
                   ),
                 ],
               ),
@@ -112,32 +111,32 @@ class _SinglePostCardWidgetState extends State<SinglePostCardWidget> {
                     GestureDetector(onTap: () {
                       Navigator.pushNamed(context, PageConst.commentPage, arguments: AppEntity(uid: _currentUid, postId: widget.post.postId));
                       //Navigator.push(context, MaterialPageRoute(builder: (context) => CommentPage()));
-                    },child: Icon(Icons.mp_sharp, color: primaryColor,)),
+                    },child: const Icon(Icons.mp_sharp, color: primaryColor,)),
                     sizeHor(10),
-                    Icon(Icons.send, color: primaryColor,),
+                    const Icon(Icons.send, color: primaryColor,),
                   ],
                 ),
-                Icon(Icons.bookmark_border, color: primaryColor,)
+                const Icon(Icons.bookmark_border, color: primaryColor,)
 
               ],
             ),
             sizeVer(10),
-            Text("${widget.post.totalLikes} likes", style: TextStyle(color: primaryColor, fontWeight: FontWeight.bold),),
+            Text("${widget.post.totalLikes} likes", style: const TextStyle(color: primaryColor, fontWeight: FontWeight.bold),),
             sizeVer(10),
             Row(
               children: [
-                Text("${widget.post.username}", style: TextStyle(color: primaryColor, fontWeight: FontWeight.bold),),
+                Text("${widget.post.username}", style: const TextStyle(color: primaryColor, fontWeight: FontWeight.bold),),
                 sizeHor(10),
-                Text("${widget.post.description}", style: TextStyle(color: primaryColor),),
+                Text("${widget.post.description}", style: const TextStyle(color: primaryColor),),
               ],
             ),
             sizeVer(10),
             GestureDetector(onTap: () {
               Navigator.pushNamed(context, PageConst.commentPage, arguments: AppEntity(uid: _currentUid, postId: widget.post.postId));
 
-            },child: Text("View all ${widget.post.totalComments} comments", style: TextStyle(color: Colors.white),)),
+            },child: Text("View all ${widget.post.totalComments} comments", style: const TextStyle(color: Colors.white),)),
             sizeVer(10),
-            Text("${DateFormat("dd/MMM/yyy").format(widget.post.createAt!.toDate())}", style: TextStyle(color: Colors.white),),
+            Text("${DateFormat("dd/MMM/yyy").format(widget.post.createAt!.toDate())}", style: const TextStyle(color: Colors.white),),
 
           ],
         ),
@@ -151,39 +150,39 @@ class _SinglePostCardWidgetState extends State<SinglePostCardWidget> {
             decoration: BoxDecoration(color: backgroundColor.withOpacity(.8)),
             child: SingleChildScrollView(
               child: Container(
-                margin: EdgeInsets.symmetric(vertical: 10),
+                margin: const EdgeInsets.symmetric(vertical: 10),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Padding(
-                      padding: const EdgeInsets.only(left: 10.0),
+                    const Padding(
+                      padding: EdgeInsets.only(left: 10.0),
                       child: Text(
                         "More Options",
                         style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18, color: primaryColor),
                       ),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 8,
                     ),
-                    Divider(
+                    const Divider(
                       thickness: 1,
                       color: secondaryColor,
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 8,
                     ),
                     Padding(
                       padding: const EdgeInsets.only(left: 10.0),
                       child: GestureDetector(
                         onTap: _deletePost,
-                        child: Text(
+                        child: const Text(
                           "Delete Post",
                           style: TextStyle(fontWeight: FontWeight.w500, fontSize: 16, color: primaryColor),
                         ),
                       ),
                     ),
                     sizeVer(7),
-                    Divider(
+                    const Divider(
                       thickness: 1,
                       color: secondaryColor,
                     ),
@@ -197,7 +196,7 @@ class _SinglePostCardWidgetState extends State<SinglePostCardWidget> {
                           // Navigator.push(context, MaterialPageRoute(builder: (context) => UpdatePostPage()));
 
                         },
-                        child: Text(
+                        child: const Text(
                           "Update Post",
                           style: TextStyle(fontWeight: FontWeight.w500, fontSize: 16, color: primaryColor),
                         ),
