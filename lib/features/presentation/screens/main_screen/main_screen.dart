@@ -3,7 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:graze_app/core/constants/constants.dart';
 import 'package:graze_app/features/presentation/cubit/user/get_single_user/get_single_user_cubit.dart';
+import 'package:graze_app/features/presentation/screens/activity/activity_screen.dart';
 import 'package:graze_app/features/presentation/screens/home/home_page.dart';
+import 'package:graze_app/features/presentation/screens/posts/upload_post_page.dart';
 import 'package:graze_app/features/presentation/screens/profile/profile_page.dart';
 import 'package:graze_app/features/presentation/screens/search/search_page.dart';
 
@@ -56,9 +58,9 @@ class _MainScreenState extends State<MainScreen> {
             bottomNavigationBar: CupertinoTabBar(
               backgroundColor: backgroundColor,
               items: const [
-                BottomNavigationBarItem(icon: Icon(Icons.add_photo_alternate, color: primaryColor), label: ""),
-                BottomNavigationBarItem(icon: Icon(Icons.abc, color: primaryColor), label: ""),
-                BottomNavigationBarItem(icon: Icon(Icons.access_alarm, color: primaryColor), label: ""),
+                BottomNavigationBarItem(icon: Icon(Icons.home, color: primaryColor), label: ""),
+                BottomNavigationBarItem(icon: Icon(Icons.search, color: primaryColor), label: ""),
+                BottomNavigationBarItem(icon: Icon(Icons.add_circle_outline_rounded, color: primaryColor), label: ""),
                 BottomNavigationBarItem(icon: Icon(Icons.favorite, color: primaryColor), label: ""),
                 BottomNavigationBarItem(icon: Icon(Icons.account_circle_outlined, color: primaryColor), label: ""),
 
@@ -71,8 +73,8 @@ class _MainScreenState extends State<MainScreen> {
               children: [
                 HomePage(),
                 SearchPage(),
-                // UploadPostPage(currentUser: currentUser),
-                // ActivityPage(),
+                UploadPostPage(currentUser: currentUser),
+                ActivityPage(),
                 ProfilePage(currentUser: currentUser,)
               ],
             ),

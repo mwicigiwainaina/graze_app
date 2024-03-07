@@ -7,12 +7,22 @@ import 'package:graze_app/features/data/data_sources/remote_data_sources_impl.da
 import 'package:graze_app/features/data/models/user/user_model.dart';
 import 'package:graze_app/features/data/repository/firebase_repository_impl.dart';
 import 'package:graze_app/features/domain/repository/firebase_repository.dart';
+import 'package:graze_app/features/domain/usecases/comment/create_comment_usecase.dart';
+import 'package:graze_app/features/domain/usecases/comment/delete_comment_usecase.dart';
+import 'package:graze_app/features/domain/usecases/comment/like_comment_usecase.dart';
+import 'package:graze_app/features/domain/usecases/comment/read_comment_usecase.dart';
+import 'package:graze_app/features/domain/usecases/comment/update_comment_usecase.dart';
 import 'package:graze_app/features/domain/usecases/post/create_post_usecase.dart';
 import 'package:graze_app/features/domain/usecases/post/delete_post_usecase.dart';
 import 'package:graze_app/features/domain/usecases/post/like_post_usecase.dart';
 import 'package:graze_app/features/domain/usecases/post/read_post_usecase.dart';
 import 'package:graze_app/features/domain/usecases/post/read_single_post_usecase.dart';
 import 'package:graze_app/features/domain/usecases/post/update_post_usecase.dart';
+import 'package:graze_app/features/domain/usecases/replay/create_replay_usecase.dart';
+import 'package:graze_app/features/domain/usecases/replay/delete_replay_usecase.dart';
+import 'package:graze_app/features/domain/usecases/replay/like_replay_usecase.dart';
+import 'package:graze_app/features/domain/usecases/replay/read_replay_usecase.dart';
+import 'package:graze_app/features/domain/usecases/replay/update_replay_usecase.dart';
 import 'package:graze_app/features/domain/usecases/storage/upload_image_to_storage_usecase.dart';
 import 'package:graze_app/features/domain/usecases/user/create_user_usecase.dart';
 import 'package:graze_app/features/domain/usecases/user/follow_unfollow_usecase.dart';
@@ -26,9 +36,11 @@ import 'package:graze_app/features/domain/usecases/user/sign_out_usecase.dart';
 import 'package:graze_app/features/domain/usecases/user/sign_up_user_usecase.dart';
 import 'package:graze_app/features/domain/usecases/user/update_user_usecase.dart';
 import 'package:graze_app/features/presentation/cubit/auth/auth_cubit.dart';
+import 'package:graze_app/features/presentation/cubit/comment/comment_cubit.dart';
 import 'package:graze_app/features/presentation/cubit/credential/credential_cubit.dart';
 import 'package:graze_app/features/presentation/cubit/post/get_single_post/get_single_post_cubit.dart';
 import 'package:graze_app/features/presentation/cubit/post/post_cubit.dart';
+import 'package:graze_app/features/presentation/cubit/replay/replay_cubit.dart';
 import 'package:graze_app/features/presentation/cubit/user/get_single_other_user.dart/get_single_other_user_cubit.dart';
 import 'package:graze_app/features/presentation/cubit/user/get_single_user/get_single_user_cubit.dart';
 import 'package:graze_app/features/presentation/cubit/user/user_cubit.dart';
@@ -81,26 +93,26 @@ Future<void> init() async {
     () => GetSinglePostCubit(readSinglePostUseCase: sl.call()),
   );
 
-  // // Comment Cubit Injection
-  // sl.registerFactory(
-  //   () => CommentCubit(
-  //     createCommentUseCase: sl.call(),
-  //     deleteCommentUseCase: sl.call(),
-  //     likeCommentUseCase: sl.call(),
-  //     readCommentsUseCase: sl.call(),
-  //     updateCommentUseCase: sl.call(),
-  //   ),
-  // );
+  // Comment Cubit Injection
+  sl.registerFactory(
+    () => CommentCubit(
+      createCommentUseCase: sl.call(),
+      deleteCommentUseCase: sl.call(),
+      likeCommentUseCase: sl.call(),
+      readCommentsUseCase: sl.call(),
+      updateCommentUseCase: sl.call(),
+    ),
+  );
 
-  // // Replay Cubit Injection
-  // sl.registerFactory(
-  //   () => ReplayCubit(
-  //       createReplayUseCase: sl.call(),
-  //       deleteReplayUseCase: sl.call(),
-  //       likeReplayUseCase: sl.call(),
-  //       readReplaysUseCase: sl.call(),
-  //       updateReplayUseCase: sl.call()),
-  // );
+  // Replay Cubit Injection
+  sl.registerFactory(
+    () => ReplayCubit(
+        createReplayUseCase: sl.call(),
+        deleteReplayUseCase: sl.call(),
+        likeReplayUseCase: sl.call(),
+        readReplaysUseCase: sl.call(),
+        updateReplayUseCase: sl.call()),
+  );
 
   // Use Cases
   // User
@@ -129,19 +141,19 @@ Future<void> init() async {
   sl.registerLazySingleton(() => DeletePostUseCase(repository: sl.call()));
   sl.registerLazySingleton(() => ReadSinglePostUseCase(repository: sl.call()));
 
-  // // Comment
-  // sl.registerLazySingleton(() => CreateCommentUseCase(repository: sl.call()));
-  // sl.registerLazySingleton(() => ReadCommentsUseCase(repository: sl.call()));
-  // sl.registerLazySingleton(() => LikeCommentUseCase(repository: sl.call()));
-  // sl.registerLazySingleton(() => UpdateCommentUseCase(repository: sl.call()));
-  // sl.registerLazySingleton(() => DeleteCommentUseCase(repository: sl.call()));
+  // Comment
+  sl.registerLazySingleton(() => CreateCommentUseCase(repository: sl.call()));
+  sl.registerLazySingleton(() => ReadCommentsUseCase(repository: sl.call()));
+  sl.registerLazySingleton(() => LikeCommentUseCase(repository: sl.call()));
+  sl.registerLazySingleton(() => UpdateCommentUseCase(repository: sl.call()));
+  sl.registerLazySingleton(() => DeleteCommentUseCase(repository: sl.call()));
 
-  // // Replay
-  // sl.registerLazySingleton(() => CreateReplayUseCase(repository: sl.call()));
-  // sl.registerLazySingleton(() => ReadReplaysUseCase(repository: sl.call()));
-  // sl.registerLazySingleton(() => LikeReplayUseCase(repository: sl.call()));
-  // sl.registerLazySingleton(() => UpdateReplayUseCase(repository: sl.call()));
-  // sl.registerLazySingleton(() => DeleteReplayUseCase(repository: sl.call()));
+  // Replay
+  sl.registerLazySingleton(() => CreateReplayUseCase(repository: sl.call()));
+  sl.registerLazySingleton(() => ReadReplaysUseCase(repository: sl.call()));
+  sl.registerLazySingleton(() => LikeReplayUseCase(repository: sl.call()));
+  sl.registerLazySingleton(() => UpdateReplayUseCase(repository: sl.call()));
+  sl.registerLazySingleton(() => DeleteReplayUseCase(repository: sl.call()));
 
   // Repository
 

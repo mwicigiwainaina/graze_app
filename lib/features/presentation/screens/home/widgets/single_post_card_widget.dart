@@ -111,7 +111,7 @@ class _SinglePostCardWidgetState extends State<SinglePostCardWidget> {
                     GestureDetector(onTap: () {
                       Navigator.pushNamed(context, PageConst.commentPage, arguments: AppEntity(uid: _currentUid, postId: widget.post.postId));
                       //Navigator.push(context, MaterialPageRoute(builder: (context) => CommentPage()));
-                    },child: const Icon(Icons.mp_sharp, color: primaryColor,)),
+                    },child: const Icon(Icons.chat_bubble_rounded, color: primaryColor,)),
                     sizeHor(10),
                     const Icon(Icons.send, color: primaryColor,),
                   ],

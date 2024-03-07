@@ -1,5 +1,7 @@
 import 'dart:io';
+import 'package:graze_app/features/domain/entities/comment/comment_entity.dart';
 import 'package:graze_app/features/domain/entities/posts/post_entity.dart';
+import 'package:graze_app/features/domain/entities/replay/replay_entity.dart';
 import 'package:graze_app/features/domain/entities/user/user_entity.dart';
 
 abstract class FirebaseRepository {
@@ -28,4 +30,20 @@ abstract class FirebaseRepository {
   Future<void> updatePost(PostEntity post);
   Future<void> deletePost(PostEntity post);
   Future<void> likePost(PostEntity post);
+
+    // Comment Features
+  Future<void> createComment(CommentEntity comment);
+  Stream<List<CommentEntity>> readComments(String postId);
+  Future<void> updateComment(CommentEntity comment);
+  Future<void> deleteComment(CommentEntity comment);
+  Future<void> likeComment(CommentEntity comment);
+
+  // Replay Features
+  Future<void> createReplay(ReplayEntity replay);
+  Stream<List<ReplayEntity>> readReplays(ReplayEntity replay);
+  Future<void> updateReplay(ReplayEntity replay);
+  Future<void> deleteReplay(ReplayEntity replay);
+  Future<void> likeReplay(ReplayEntity replay);
+
 }
+

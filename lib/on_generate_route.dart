@@ -1,10 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:graze_app/core/constants/constants.dart';
 import 'package:graze_app/features/domain/entities/app_entity.dart';
+import 'package:graze_app/features/domain/entities/comment/comment_entity.dart';
 import 'package:graze_app/features/domain/entities/posts/post_entity.dart';
+import 'package:graze_app/features/domain/entities/replay/replay_entity.dart';
 import 'package:graze_app/features/domain/entities/user/user_entity.dart';
 import 'package:graze_app/features/presentation/screens/auth/sign_in_page.dart';
 import 'package:graze_app/features/presentation/screens/auth/sign_up_page.dart';
+import 'package:graze_app/features/presentation/screens/posts/comment/comment_page.dart';
+import 'package:graze_app/features/presentation/screens/posts/comment/edit_comment_page.dart';
+import 'package:graze_app/features/presentation/screens/posts/comment/edit_replay_page.dart';
+import 'package:graze_app/features/presentation/screens/posts/post_detail_page.dart';
+import 'package:graze_app/features/presentation/screens/posts/update_post_page.dart';
 import 'package:graze_app/features/presentation/screens/profile/edit_profile_page.dart';
 import 'package:graze_app/features/presentation/screens/profile/followers_page.dart';
 import 'package:graze_app/features/presentation/screens/profile/following_page.dart';
@@ -25,42 +32,42 @@ class OnGenerateRoute {
         }
 
       }
-      // case PageConst.updatePostPage: {
-      //   if (args is PostEntity) {
-      //     return routeBuilder(UpdatePostPage(post: args,));
+      case PageConst.updatePostPage: {
+        if (args is PostEntity) {
+          return routeBuilder(UpdatePostPage(post: args,));
 
-      //   } else {
-      //     return routeBuilder(NoPageFound());
-      //   }
-      // }
-      // case PageConst.updateCommentPage: {
-      //   if (args is CommentEntity) {
-      //     return routeBuilder(EditCommentPage(comment: args,));
+        } else {
+          return routeBuilder(NoPageFound());
+        }
+      }
+      case PageConst.updateCommentPage: {
+        if (args is CommentEntity) {
+          return routeBuilder(EditCommentPage(comment: args,));
 
-      //   } else {
-      //     return routeBuilder(NoPageFound());
-      //   }
-      // }
-      // case PageConst.updateReplayPage: {
-      //   if (args is ReplayEntity) {
-      //     return routeBuilder(EditReplayPage(replay: args,));
+        } else {
+          return routeBuilder(NoPageFound());
+        }
+      }
+      case PageConst.updateReplayPage: {
+        if (args is ReplayEntity) {
+          return routeBuilder(EditReplayPage(replay: args,));
 
-      //   } else {
-      //     return routeBuilder(NoPageFound());
-      //   }
-      // }
-      // case PageConst.commentPage: {
-      //   if (args is AppEntity) {
-      //     return routeBuilder(CommentPage(appEntity: args,));
-      //   }
-      //   return routeBuilder(NoPageFound());
-      // }
-      // case PageConst.postDetailPage: {
-      //   if (args is String) {
-      //     return routeBuilder(PostDetailPage(postId: args,));
-      //   }
-      //   return routeBuilder(NoPageFound());
-      // }
+        } else {
+          return routeBuilder(NoPageFound());
+        }
+      }
+      case PageConst.commentPage: {
+        if (args is AppEntity) {
+          return routeBuilder(CommentPage(appEntity: args,));
+        }
+        return routeBuilder(NoPageFound());
+      }
+      case PageConst.postDetailPage: {
+        if (args is String) {
+          return routeBuilder(PostDetailPage(postId: args,));
+        }
+        return routeBuilder(NoPageFound());
+      }
       case PageConst.singleUserProfilePage: {
         if (args is String) {
           return routeBuilder(SingleUserProfilePage(otherUserId: args,));
