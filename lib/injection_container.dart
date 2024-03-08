@@ -18,11 +18,11 @@ import 'package:graze_app/features/domain/usecases/post/like_post_usecase.dart';
 import 'package:graze_app/features/domain/usecases/post/read_post_usecase.dart';
 import 'package:graze_app/features/domain/usecases/post/read_single_post_usecase.dart';
 import 'package:graze_app/features/domain/usecases/post/update_post_usecase.dart';
-import 'package:graze_app/features/domain/usecases/replay/create_replay_usecase.dart';
-import 'package:graze_app/features/domain/usecases/replay/delete_replay_usecase.dart';
-import 'package:graze_app/features/domain/usecases/replay/like_replay_usecase.dart';
-import 'package:graze_app/features/domain/usecases/replay/read_replay_usecase.dart';
-import 'package:graze_app/features/domain/usecases/replay/update_replay_usecase.dart';
+import 'package:graze_app/features/domain/usecases/reply/create_reply_usecase.dart';
+import 'package:graze_app/features/domain/usecases/reply/delete_reply_usecase.dart';
+import 'package:graze_app/features/domain/usecases/reply/like_reply_usecase.dart';
+import 'package:graze_app/features/domain/usecases/reply/read_reply_usecase.dart';
+import 'package:graze_app/features/domain/usecases/reply/update_reply_usecase.dart';
 import 'package:graze_app/features/domain/usecases/storage/upload_image_to_storage_usecase.dart';
 import 'package:graze_app/features/domain/usecases/user/create_user_usecase.dart';
 import 'package:graze_app/features/domain/usecases/user/follow_unfollow_usecase.dart';
@@ -40,7 +40,7 @@ import 'package:graze_app/features/presentation/cubit/comment/comment_cubit.dart
 import 'package:graze_app/features/presentation/cubit/credential/credential_cubit.dart';
 import 'package:graze_app/features/presentation/cubit/post/get_single_post/get_single_post_cubit.dart';
 import 'package:graze_app/features/presentation/cubit/post/post_cubit.dart';
-import 'package:graze_app/features/presentation/cubit/replay/replay_cubit.dart';
+import 'package:graze_app/features/presentation/cubit/reply/reply_cubit.dart';
 import 'package:graze_app/features/presentation/cubit/user/get_single_other_user.dart/get_single_other_user_cubit.dart';
 import 'package:graze_app/features/presentation/cubit/user/get_single_user/get_single_user_cubit.dart';
 import 'package:graze_app/features/presentation/cubit/user/user_cubit.dart';
@@ -104,14 +104,14 @@ Future<void> init() async {
     ),
   );
 
-  // Replay Cubit Injection
+  // Reply Cubit Injection
   sl.registerFactory(
-    () => ReplayCubit(
-        createReplayUseCase: sl.call(),
-        deleteReplayUseCase: sl.call(),
-        likeReplayUseCase: sl.call(),
-        readReplaysUseCase: sl.call(),
-        updateReplayUseCase: sl.call()),
+    () => ReplyCubit(
+        createReplyUseCase: sl.call(),
+        deleteReplyUseCase: sl.call(),
+        likeReplyUseCase: sl.call(),
+        readReplysUseCase: sl.call(),
+        updateReplyUseCase: sl.call()),
   );
 
   // Use Cases
@@ -148,19 +148,24 @@ Future<void> init() async {
   sl.registerLazySingleton(() => UpdateCommentUseCase(repository: sl.call()));
   sl.registerLazySingleton(() => DeleteCommentUseCase(repository: sl.call()));
 
-  // Replay
-  sl.registerLazySingleton(() => CreateReplayUseCase(repository: sl.call()));
-  sl.registerLazySingleton(() => ReadReplaysUseCase(repository: sl.call()));
-  sl.registerLazySingleton(() => LikeReplayUseCase(repository: sl.call()));
-  sl.registerLazySingleton(() => UpdateReplayUseCase(repository: sl.call()));
-  sl.registerLazySingleton(() => DeleteReplayUseCase(repository: sl.call()));
+  // Reply
+  sl.registerLazySingleton(() => CreateReplyUseCase(repository: sl.call()));
+  sl.registerLazySingleton(() => ReadReplysUseCase(repository: sl.call()));
+  sl.registerLazySingleton(() => LikeReplyUseCase(repository: sl.call()));
+  sl.registerLazySingleton(() => UpdateReplyUseCase(repository: sl.call()));
+  sl.registerLazySingleton(() => DeleteReplyUseCase(repository: sl.call()));
 
   // Repository
 
-  sl.registerLazySingleton<FirebaseRepository>(() => FirebaseRepositoryImpl(remoteDataSource: sl.call()));
+  sl.registerLazySingleton<FirebaseRepository>(
+      () => FirebaseRepositoryImpl(remoteDataSource: sl.call()));
 
   // Remote Data Source
-  sl.registerLazySingleton<FirebaseRemoteDataSource>(() => FirebaseRemoteDataSourceImpl(firebaseFirestore: sl.call(), firebaseAuth: sl.call(), firebaseStorage: sl.call()));
+  sl.registerLazySingleton<FirebaseRemoteDataSource>(() =>
+      FirebaseRemoteDataSourceImpl(
+          firebaseFirestore: sl.call(),
+          firebaseAuth: sl.call(),
+          firebaseStorage: sl.call()));
 
   // Externals
 

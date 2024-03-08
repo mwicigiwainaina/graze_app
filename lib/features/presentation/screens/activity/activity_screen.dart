@@ -16,3 +16,5 @@ class ActivityPage extends StatelessWidget {
     );
   }
 }
+
+// include, likes, comments, follows, maybe tags

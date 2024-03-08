@@ -10,7 +10,7 @@ class CommentModel extends CommentEntity {
   final String? userProfileUrl;
   final Timestamp? createAt;
   final List<String>? likes;
-  final num? totalReplays;
+  final num? totalReplys;
 
   CommentModel({
     this.commentId,
@@ -21,18 +21,17 @@ class CommentModel extends CommentEntity {
     this.userProfileUrl,
     this.createAt,
     this.likes,
-    this.totalReplays,
+    this.totalReplys,
   }) : super(
-    postId: postId,
-    creatorUid: creatorUid,
-    description: description,
-    userProfileUrl: userProfileUrl,
-    username: username,
-    likes: likes,
-    createAt: createAt,
-    commentId: commentId,
-    totalReplays: totalReplays
-  );
+            postId: postId,
+            creatorUid: creatorUid,
+            description: description,
+            userProfileUrl: userProfileUrl,
+            username: username,
+            likes: likes,
+            createAt: createAt,
+            commentId: commentId,
+            totalReplys: totalReplys);
 
   factory CommentModel.fromSnapshot(DocumentSnapshot snap) {
     var snapshot = snap.data() as Map<String, dynamic>;
@@ -44,21 +43,21 @@ class CommentModel extends CommentEntity {
       userProfileUrl: snapshot['userProfileUrl'],
       commentId: snapshot['commentId'],
       createAt: snapshot['createAt'],
-      totalReplays: snapshot['totalReplays'],
+      totalReplys: snapshot['totalReplys'],
       username: snapshot['username'],
       likes: List.from(snap.get("likes")),
     );
   }
 
   Map<String, dynamic> toJson() => {
-    "creatorUid": creatorUid,
-    "description": description,
-    "userProfileUrl": userProfileUrl,
-    "commentId": commentId,
-    "createAt": createAt,
-    "totalReplays": totalReplays,
-    "postId": postId,
-    "likes": likes,
-    "username": username,
-  };
+        "creatorUid": creatorUid,
+        "description": description,
+        "userProfileUrl": userProfileUrl,
+        "commentId": commentId,
+        "createAt": createAt,
+        "totalReplys": totalReplys,
+        "postId": postId,
+        "likes": likes,
+        "username": username,
+      };
 }

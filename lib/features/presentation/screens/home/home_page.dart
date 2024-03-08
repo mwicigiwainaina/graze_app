@@ -17,11 +17,16 @@ class HomePage extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: backgroundColor,
         title: Image.asset("assets/graze_logo.png", color: primaryColor, height: 32,),
+        centerTitle: true,
         actions: const [
           Padding(
             padding: EdgeInsets.only(right: 10.0),
-            child: Icon(Icons.border_outer_outlined, color: primaryColor,),
-          )
+            child: Icon(Icons.location_on, color: primaryColor,),
+          ),
+          Padding(
+            padding: EdgeInsets.only(right: 10.0),
+            child: Icon(Icons.inbox, color: primaryColor),
+          ),
         ],
       ),
       body: BlocProvider<PostCubit>(

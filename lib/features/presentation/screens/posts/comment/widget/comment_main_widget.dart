@@ -7,7 +7,7 @@ import 'package:graze_app/features/domain/entities/comment/comment_entity.dart';
 import 'package:graze_app/features/domain/entities/user/user_entity.dart';
 import 'package:graze_app/features/presentation/cubit/comment/comment_cubit.dart';
 import 'package:graze_app/features/presentation/cubit/post/get_single_post/get_single_post_cubit.dart';
-import 'package:graze_app/features/presentation/cubit/replay/replay_cubit.dart';
+import 'package:graze_app/features/presentation/cubit/reply/reply_cubit.dart';
 import 'package:graze_app/features/presentation/cubit/user/get_single_user/get_single_user_cubit.dart';
 import 'package:graze_app/features/presentation/screens/posts/comment/widget/single_comment_widget.dart';
 import 'package:graze_app/profile_widget.dart';
@@ -118,7 +118,7 @@ class _CommentMainWidgetState extends State<CommentMainWidget> {
                                     final singleComment =
                                         commentState.comments[index];
                                     return BlocProvider(
-                                      create: (context) => di.sl<ReplayCubit>(),
+                                      create: (context) => di.sl<ReplyCubit>(),
                                       child: SingleCommentWidget(
                                         currentUser: singleUser,
                                         comment: singleComment,
@@ -207,7 +207,7 @@ class _CommentMainWidgetState extends State<CommentMainWidget> {
     BlocProvider.of<CommentCubit>(context)
         .createComment(
             comment: CommentEntity(
-      totalReplays: 0,
+      totalReplys: 0,
       commentId: Uuid().v1(),
       createAt: Timestamp.now(),
       likes: [],

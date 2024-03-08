@@ -1,7 +1,7 @@
 import 'dart:io';
 import 'package:graze_app/features/domain/entities/comment/comment_entity.dart';
 import 'package:graze_app/features/domain/entities/posts/post_entity.dart';
-import 'package:graze_app/features/domain/entities/replay/replay_entity.dart';
+import 'package:graze_app/features/domain/entities/reply/reply_entity.dart';
 import 'package:graze_app/features/domain/entities/user/user_entity.dart';
 
 abstract class FirebaseRepository {
@@ -20,8 +20,9 @@ abstract class FirebaseRepository {
   Future<void> updateUser(UserEntity user);
   Future<void> followUnFollowUser(UserEntity user);
 
-    // Cloud Storage Feature
-  Future<String> uploadImageToStorage(File? file, bool isPost, String childName);
+  // Cloud Storage Feature
+  Future<String> uploadImageToStorage(
+      File? file, bool isPost, String childName);
 
   // Post Features
   Future<void> createPost(PostEntity post);
@@ -31,19 +32,17 @@ abstract class FirebaseRepository {
   Future<void> deletePost(PostEntity post);
   Future<void> likePost(PostEntity post);
 
-    // Comment Features
+  // Comment Features
   Future<void> createComment(CommentEntity comment);
   Stream<List<CommentEntity>> readComments(String postId);
   Future<void> updateComment(CommentEntity comment);
   Future<void> deleteComment(CommentEntity comment);
   Future<void> likeComment(CommentEntity comment);
 
-  // Replay Features
-  Future<void> createReplay(ReplayEntity replay);
-  Stream<List<ReplayEntity>> readReplays(ReplayEntity replay);
-  Future<void> updateReplay(ReplayEntity replay);
-  Future<void> deleteReplay(ReplayEntity replay);
-  Future<void> likeReplay(ReplayEntity replay);
-
+  // Reply Features
+  Future<void> createReply(ReplyEntity reply);
+  Stream<List<ReplyEntity>> readReplys(ReplyEntity reply);
+  Future<void> updateReply(ReplyEntity reply);
+  Future<void> deleteReply(ReplyEntity reply);
+  Future<void> likeReply(ReplyEntity reply);
 }
-

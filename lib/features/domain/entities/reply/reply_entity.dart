@@ -1,9 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:equatable/equatable.dart';
 
-class ReplayEntity extends Equatable {
+class ReplyEntity extends Equatable {
   final String? creatorUid;
-  final String? replayId;
+  final String? replyId;
   final String? commentId;
   final String? postId;
   final String? description;
@@ -12,9 +12,9 @@ class ReplayEntity extends Equatable {
   final List<String>? likes;
   final Timestamp? createAt;
 
-  ReplayEntity({
+  ReplyEntity({
     this.creatorUid,
-    this.replayId,
+    this.replyId,
     this.commentId,
     this.postId,
     this.description,
@@ -26,14 +26,14 @@ class ReplayEntity extends Equatable {
 
   @override
   List<Object?> get props => [
-    creatorUid,
-    replayId,
-    commentId,
-    postId,
-    description,
-    username,
-    userProfileUrl,
-    likes,
-    createAt,
-  ];
+        creatorUid,
+        replyId,
+        commentId,
+        postId,
+        description,
+        username,
+        userProfileUrl,
+        likes,
+        createAt,
+      ];
 }
