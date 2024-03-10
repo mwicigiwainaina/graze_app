@@ -27,11 +27,19 @@ class _UploadPostMainWidgetState extends State<UploadPostMainWidget> {
 
   File? _image;
   TextEditingController _descriptionController = TextEditingController();
+  TextEditingController _dishNameController = TextEditingController();
+  TextEditingController _ratingController = TextEditingController();
+  TextEditingController _distanceController = TextEditingController();
+  TextEditingController _restaurantController = TextEditingController();
   bool _uploading = false;
 
   @override
   void dispose() {
     _descriptionController.dispose();
+    _dishNameController.dispose();
+    _ratingController.dispose();
+    _distanceController.dispose();
+    _restaurantController.dispose();
     super.dispose();
   }
 
@@ -53,27 +61,28 @@ class _UploadPostMainWidgetState extends State<UploadPostMainWidget> {
   }
 
   @override
-  Widget build(BuildContext context) {
-    return _image == null? _uploadPostWidget() : Scaffold(
+Widget build(BuildContext context) {
+  return _image == null ? _uploadPostWidget() : Scaffold(
+    backgroundColor: backgroundColor,
+    appBar: AppBar(
       backgroundColor: backgroundColor,
-      appBar: AppBar(
-        backgroundColor: backgroundColor,
-        leading: GestureDetector(onTap: () => setState(() => _image = null),child: Icon(Icons.close, size: 28,)),
-        actions: [
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: GestureDetector(onTap: _submitPost,child: Icon(Icons.arrow_forward)),
-          )
-        ],
-      ),
-      body: Padding(
+      leading: GestureDetector(onTap: () => setState(() => _image = null), child: Icon(Icons.close, size: 28,)),
+      actions: [
+        Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: GestureDetector(onTap: _submitPost, child: Icon(Icons.arrow_forward)),
+        )
+      ],
+    ),
+    body: SingleChildScrollView(
+      child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 10.0),
         child: Column(
           children: [
             Container(
               width: 80,
               height: 80,
-              child: ClipRRect(borderRadius: BorderRadius.circular(40),child: profileWidget(imageUrl: "${widget.currentUser.profileUrl}")),
+              child: ClipRRect(borderRadius: BorderRadius.circular(40), child: profileWidget(imageUrl: "${widget.currentUser.profileUrl}")),
             ),
             sizeVer(10),
             Text("${widget.currentUser.username}", style: TextStyle(color: Colors.white),),
@@ -86,7 +95,15 @@ class _UploadPostMainWidgetState extends State<UploadPostMainWidget> {
             sizeVer(10),
             ProfileFormWidget(title: "Description", controller: _descriptionController,),
             sizeVer(10),
-            _uploading == true?Row(
+            ProfileFormWidget(title: "Dish Name", controller: _dishNameController,),
+            sizeVer(10),
+            ProfileFormWidget(title: "Restaurant", controller: _restaurantController,),
+            sizeVer(10),
+            ProfileFormWidget(title: "Distance", controller: _distanceController,),
+            sizeVer(10),
+            ProfileFormWidget(title: "Rating", controller: _ratingController,),
+            sizeVer(10),
+            _uploading == true ? Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text("Uploading...", style: TextStyle(color: Colors.white),),
@@ -97,8 +114,9 @@ class _UploadPostMainWidgetState extends State<UploadPostMainWidget> {
           ],
         ),
       ),
-    );
-  }
+    ),
+  );
+}
 
   _submitPost() {
     setState(() {
@@ -113,6 +131,10 @@ class _UploadPostMainWidgetState extends State<UploadPostMainWidget> {
     BlocProvider.of<PostCubit>(context).createPost(
         post: PostEntity(
             description: _descriptionController.text,
+            dishName: _dishNameController.text,
+            rating: _ratingController.text,
+            distance: _distanceController.text,
+            restaurant: _restaurantController.text,
             createAt: Timestamp.now(),
             creatorUid: widget.currentUser.uid,
             likes: [],
@@ -130,6 +152,10 @@ class _UploadPostMainWidgetState extends State<UploadPostMainWidget> {
     setState(() {
       _uploading = false;
       _descriptionController.clear();
+      _restaurantController.clear();
+      _ratingController.clear();
+      _dishNameController.clear();
+      _distanceController.clear();
       _image = null;
     });
   }

@@ -12,6 +12,10 @@ class PostEntity extends Equatable {
   final num? totalComments;
   final Timestamp? createAt;
   final String? userProfileUrl;
+  final String? dishName;
+  final String? distance;
+  final String? restaurant;
+  final String? rating;
 
   PostEntity({
     this.postId,
@@ -24,10 +28,17 @@ class PostEntity extends Equatable {
     this.totalComments,
     this.createAt,
     this.userProfileUrl,
+    this.dishName,
+    this.distance,
+    this.restaurant,
+    this.rating,
+
+    //add fields from fremote database impl.
   });
 
   @override
   // TODO: implement props
+  // what are props
   List<Object?> get props => [
     postId,
     creatorUid,
@@ -39,5 +50,11 @@ class PostEntity extends Equatable {
     totalComments,
     createAt,
     userProfileUrl,
+    dishName,
+    distance,
+    restaurant,
+    rating,
   ];
+
+  
 }

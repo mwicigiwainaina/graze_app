@@ -9,6 +9,8 @@ const blueColor = Color.fromRGBO(0, 149, 246, 1);
 const primaryColor = Colors.white;
 const secondaryColor = Color.fromRGBO(255, 255, 255, 1);
 const darkGreyColor = Color.fromRGBO(97, 97, 97, 1);
+const grazeGreen = Color.fromRGBO(241, 255, 231, 1);
+const grazeGreenText = Color.fromRGBO(165, 175, 43, 1);
 
 Widget sizeVer(double height) {
   return SizedBox(

@@ -6,26 +6,32 @@ class ProfileFormWidget extends StatelessWidget {
   final String? title;
   const ProfileFormWidget({Key? key, this.title, this.controller}) : super(key: key);
 
-  @override
+ @override
   Widget build(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text("$title", style: TextStyle(color: primaryColor, fontSize: 16),),
+        Text(
+          "$title",
+          style: TextStyle(color: primaryColor, fontSize: 16),
+        ),
         sizeVer(10),
         TextFormField(
           controller: controller,
           style: TextStyle(color: primaryColor),
           decoration: InputDecoration(
-              border: InputBorder.none,
-              labelStyle: TextStyle(color: primaryColor)
+            border: OutlineInputBorder(
+              borderSide: BorderSide(color: primaryColor),
+            ),
+            focusedBorder: OutlineInputBorder(
+              borderSide: BorderSide(color: Colors.blue),
+            ),
+            enabledBorder: OutlineInputBorder(
+              borderSide: BorderSide(color: primaryColor),
+            ),
+            labelStyle: TextStyle(color: primaryColor),
           ),
         ),
-        Container(
-          width: double.infinity,
-          height: 1,
-          color: secondaryColor,
-        )
       ],
     );
   }

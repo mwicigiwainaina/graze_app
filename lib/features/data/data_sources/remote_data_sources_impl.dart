@@ -226,8 +226,18 @@ class FirebaseRemoteDataSourceImpl implements FirebaseRemoteDataSource {
             postId: post.postId,
             likes: [],
             description: post.description,
+            //make optional
             creatorUid: post.creatorUid,
-            createAt: post.createAt)
+            createAt: post.createAt,
+            dishName: post.dishName,
+            distance: post.distance,
+            restaurant: post.restaurant,
+            rating: post.rating,)
+            //restauramt
+            //dish
+            //rating
+            //mi. from you
+            //type of food (indian, italian, etc.)
         .toJson();
 
     try {

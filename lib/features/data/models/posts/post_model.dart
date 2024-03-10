@@ -1,10 +1,7 @@
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:graze_app/features/domain/entities/posts/post_entity.dart';
 
-
 class PostModel extends PostEntity {
-
   final String? postId;
   final String? creatorUid;
   final String? username;
@@ -15,6 +12,10 @@ class PostModel extends PostEntity {
   final num? totalComments;
   final Timestamp? createAt;
   final String? userProfileUrl;
+  final String? dishName;
+  final String? distance;
+  final String? restaurant;
+  final String? rating;
 
   PostModel({
     this.postId,
@@ -27,18 +28,26 @@ class PostModel extends PostEntity {
     this.totalComments,
     this.createAt,
     this.userProfileUrl,
+    this.dishName,
+    this.distance,
+    this.restaurant,
+    this.rating,
   }) : super(
-    createAt: createAt,
-    creatorUid: creatorUid,
-    description: description,
-    likes: likes,
-    postId: postId,
-    postImageUrl: postImageUrl,
-    totalComments: totalComments,
-    totalLikes: totalLikes,
-    username: username,
-    userProfileUrl: userProfileUrl,
-  );
+          createAt: createAt,
+          creatorUid: creatorUid,
+          description: description,
+          likes: likes,
+          postId: postId,
+          postImageUrl: postImageUrl,
+          totalComments: totalComments,
+          totalLikes: totalLikes,
+          username: username,
+          userProfileUrl: userProfileUrl,
+          dishName: dishName,
+          distance: distance,
+          restaurant: restaurant,
+          rating: rating,
+        );
 
   factory PostModel.fromSnapshot(DocumentSnapshot snap) {
     var snapshot = snap.data() as Map<String, dynamic>;
@@ -54,19 +63,27 @@ class PostModel extends PostEntity {
       postId: snapshot['postId'],
       username: snapshot['username'],
       likes: List.from(snap.get("likes")),
+      dishName: snapshot['dishName'],
+      distance: snapshot['distance'],
+      restaurant: snapshot['restaurant'],
+      rating: snapshot['rating'],
     );
   }
 
   Map<String, dynamic> toJson() => {
-    "createAt": createAt,
-    "creatorUid": creatorUid,
-    "description": description,
-    "userProfileUrl": userProfileUrl,
-    "totalLikes": totalLikes,
-    "totalComments": totalComments,
-    "postImageUrl": postImageUrl,
-    "postId": postId,
-    "likes": likes,
-    "username": username,
-  };
+        "createAt": createAt,
+        "creatorUid": creatorUid,
+        "description": description,
+        "userProfileUrl": userProfileUrl,
+        "totalLikes": totalLikes,
+        "totalComments": totalComments,
+        "postImageUrl": postImageUrl,
+        "postId": postId,
+        "likes": likes,
+        "username": username,
+        "dishName": dishName,
+        "distance": distance,
+        "restaurant": restaurant,
+        "rating": rating,
+      };
 }
